@@ -37,7 +37,7 @@ export default class DeckList extends Component {
             item.cards && item.cards.length ? (
               <TouchableOpacity
                 onPress={() =>
-                  this.props.navigation.navigate("Details", { deck: item })
+                  this.props.navigation.navigate("Details", { deck: item})
                 }
               >
                 <DeckHeader deck={item} />

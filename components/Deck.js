@@ -5,7 +5,7 @@ import ButtonDeck from "./ButtonDeck";
 
 export default class Deck extends Component {
   render() {
-    const { deck } = this.props.route.params;
+    const { deck, navigation } = this.props.route.params;
     return (
       <View
         style={{
@@ -20,11 +20,19 @@ export default class Deck extends Component {
           <DeckHeader deck={deck} />
         </View>
         <View style={{ alignItems: "center", justifyContent: "space-between" }}>
-          <ButtonDeck bgColor={"white"} textColor={"black"} text={"Add Card"} />
+          <ButtonDeck
+            bgColor={"white"}
+            textColor={"black"}
+            text={"Add Card"}
+            target={"New Card"}
+            navigation={this.props.navigation}
+          />
           <ButtonDeck
             bgColor={"black"}
             textColor={"white"}
             text={"Start Quiz"}
+            target={""}
+            navigation={this.props.navigation}
           />
           <TouchableOpacity>
             <Text style={{ fontSize: 20, color: "red", margin: 10 }}>

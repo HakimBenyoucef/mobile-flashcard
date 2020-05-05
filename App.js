@@ -11,6 +11,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DeckList from "./components/DeckList";
 import AddDeck from "./components/AddDeck";
+import AddCard from "./components/AddCard";
 import Deck from "./components/Deck";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import Constants from "expo-constants";
@@ -28,6 +29,7 @@ function HomeStackScreen() {
     <HomeStack.Navigator>
       <HomeStack.Screen name="List of decks" component={DeckList} />
       <HomeStack.Screen name="Details" component={Deck} />
+      <HomeStack.Screen name="New Card" component={AddCard} />
     </HomeStack.Navigator>
   );
 }

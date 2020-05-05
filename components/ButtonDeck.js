@@ -6,7 +6,7 @@ export default class ButtonDeck extends Component {
     return (
       <View
         style={{
-          flexDirection: 'row',
+          flexDirection: "row",
           width: "70%",
           height: 50,
           borderColor: "#A2A2A2",
@@ -15,11 +15,20 @@ export default class ButtonDeck extends Component {
           backgroundColor: this.props.bgColor,
           alignItems: "center",
           justifyContent: "center",
-          margin: 10
+          margin: 10,
         }}
       >
-        <TouchableOpacity style={{ width: "100%", height: "100%" }}>
-          <Text style={{textAlign: "center", fontSize: 20, color: this.props.textColor }}>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate(this.props.target)}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 20,
+              color: this.props.textColor,
+            }}
+          >
             {this.props.text}
           </Text>
         </TouchableOpacity>
