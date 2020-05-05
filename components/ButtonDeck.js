@@ -19,7 +19,11 @@ export default class ButtonDeck extends Component {
         }}
       >
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate(this.props.target)}
+          onPress={() =>
+            this.props.action
+              ? this.props.action()
+              : this.props.navigation.navigate(this.props.target)
+          }
           style={{ width: "100%", height: "100%" }}
         >
           <Text

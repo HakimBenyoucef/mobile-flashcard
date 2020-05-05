@@ -4,6 +4,21 @@ import DeckHeader from "./DeckHeader";
 import ButtonDeck from "./ButtonDeck";
 
 export default class Deck extends Component {
+  constructor(props) {
+    super(props);
+    this.startQuiz = this.startQuiz.bind(this);
+  }
+
+  startQuiz() {
+    const { deck, navigation } = this.props.route.params;
+    if (deck.cards.length) {
+    } else {
+      alert(
+        "Sorry, you cannot take a quiz because there are no cards in the deck"
+      );
+    }
+  }
+
   render() {
     const { deck, navigation } = this.props.route.params;
     return (
@@ -31,7 +46,7 @@ export default class Deck extends Component {
             bgColor={"black"}
             textColor={"white"}
             text={"Start Quiz"}
-            target={""}
+            action={this.startQuiz}
             navigation={this.props.navigation}
           />
           <TouchableOpacity>

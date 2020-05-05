@@ -15,6 +15,10 @@ const DATA = [
     name: "Deck3",
     cards: [7, 8],
   },
+  {
+    name: "Deck4",
+    cards: [],
+  },
 ];
 export default class DeckList extends Component {
   renderSeparator = () => (
@@ -33,21 +37,15 @@ export default class DeckList extends Component {
           data={DATA}
           keyExtractor={(item) => item.name}
           ItemSeparatorComponent={this.renderSeparator}
-          renderItem={({ item }) =>
-            item.cards && item.cards.length ? (
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate("Details", { deck: item})
-                }
-              >
-                <DeckHeader deck={item} />
-              </TouchableOpacity>
-            ) : (
-              <View>
-                <Text>{item.name}</Text>
-              </View>
-            )
-          }
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate("Details", { deck: item })
+              }
+            >
+              <DeckHeader deck={item} />
+            </TouchableOpacity>
+          )}
         />
       </View>
     );
