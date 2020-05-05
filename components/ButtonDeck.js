@@ -4,27 +4,28 @@ import { View, Text, TouchableOpacity } from "react-native";
 export default class ButtonDeck extends Component {
   render() {
     return (
-      <View
+      <TouchableOpacity
+        onPress={() =>
+          this.props.action
+            ? this.props.action()
+            : this.props.navigation.navigate(this.props.target)
+        }
         style={{
-          flexDirection: "row",
-          width: "70%",
-          height: 50,
-          borderColor: "#A2A2A2",
-          borderWidth: 1,
-          borderRadius: 5,
-          backgroundColor: this.props.bgColor,
-          alignItems: "center",
-          justifyContent: "center",
-          margin: 10,
+          width: "100%",
         }}
       >
-        <TouchableOpacity
-          onPress={() =>
-            this.props.action
-              ? this.props.action()
-              : this.props.navigation.navigate(this.props.target)
-          }
-          style={{ width: "100%", height: "100%" }}
+        <View
+          style={{
+            flexDirection: "row",
+            height: 50,
+            borderColor: "#A2A2A2",
+            borderWidth: 1,
+            borderRadius: 5,
+            backgroundColor: this.props.bgColor,
+            alignItems: "center",
+            justifyContent: "center",
+            margin: 10,
+          }}
         >
           <Text
             style={{
@@ -35,8 +36,8 @@ export default class ButtonDeck extends Component {
           >
             {this.props.text}
           </Text>
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
     );
   }
 }

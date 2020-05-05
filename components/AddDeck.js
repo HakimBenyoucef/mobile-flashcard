@@ -9,12 +9,13 @@ export default class AddDeck extends Component {
         style={{
           flex: 1,
           alignItems: "center",
-          flexDirection: "column",
           justifyContent: "space-between",
         }}
       >
         <View style={{ marginTop: 100, alignItems: "center", width: "100%" }}>
-          <Text style={{ fontSize: 40, fontWeight: "bold", textAlign: "center" }}>
+          <Text
+            style={{ fontSize: 40, fontWeight: "bold", textAlign: "center" }}
+          >
             What is the title of your new deck?
           </Text>
           <TextInput
@@ -30,8 +31,19 @@ export default class AddDeck extends Component {
             }}
           />
         </View>
-        <View style={{ margin: 50 }}>
-          <ButtonDeck bgColor={"black"} textColor={"white"} text={"Create Deck"} />
+        <View
+          style={{
+            width: '60%',
+            alignItems: "center",
+            justifyContent: "space-between",
+            margin: 50
+          }}
+        >
+          <ButtonDeck
+            bgColor={"black"}
+            textColor={"white"}
+            text={"Create Deck"}
+          />
         </View>
       </View>
     );

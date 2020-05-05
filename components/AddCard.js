@@ -39,7 +39,7 @@ export default class AddCard extends Component {
             }}
           />
         </View>
-        <View style={{margin: 50}}>
+        <View style={{margin: 50, width: '60%'}}>
           <ButtonDeck bgColor={"black"} textColor={"white"} text={"Submit"} />
         </View>
       </View>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import DeckHeader from "./DeckHeader";
 import ButtonDeck from "./ButtonDeck";
 
@@ -13,10 +13,14 @@ export default class Deck extends Component {
     const { deck, navigation } = this.props.route.params;
     if (deck.cards.length) {
     } else {
-      alert(
+        this.showAlert('Deck empty',
         "Sorry, you cannot take a quiz because there are no cards in the deck"
       );
     }
+  }
+  
+  showAlert(title, message) {
+    Alert.alert(title, message, [{text: 'OK'}], {cancelable: false});
   }
 
   render() {
