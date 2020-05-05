@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 export default class Deck extends Component {
   render() {
-    return <View />;
+    return (
+      <View>
+        <Text>Deck detail</Text>
+      </View>
+    );
   }
 }
