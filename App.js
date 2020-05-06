@@ -19,6 +19,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from "react-redux";
 import { store, persistor } from "./store/configureStore";
 import { PersistGate } from "redux-persist/es/integration/react";
+import Quiz from "./components/Quiz";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,12 +28,60 @@ HomeStack.navigationOptions = {
   headerForceInset: { top: "never", bottom: "never" },
   header: null,
 };
+const config = {
+  animation: "spring",
+  config: {
+    stiffness: 1000,
+    damping: 500,
+    mass: 3,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  },
+};
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="List of decks" component={DeckList} />
-      <HomeStack.Screen name="Details" component={Deck} />
-      <HomeStack.Screen name="New Card" component={AddCard} />
+      <HomeStack.Screen
+        name="List of decks"
+        component={DeckList}
+        options={{
+          transitionSpec: {
+            open: config,
+            close: config,
+          },
+        }}
+      />
+      <HomeStack.Screen
+        name="Details"
+        component={Deck}
+        options={{
+          transitionSpec: {
+            open: config,
+            close: config,
+          },
+        }}
+      />
+      <HomeStack.Screen
+        name="New Card"
+        component={AddCard}
+        options={{
+          transitionSpec: {
+            open: config,
+            close: config,
+          },
+        }}
+      />
+      <HomeStack.Screen
+        name="Quiz"
+        component={Quiz}
+        options={{
+          transitionSpec: {
+            open: config,
+            close: config,
+          },
+        }}
+      />
     </HomeStack.Navigator>
   );
 }
@@ -77,6 +126,7 @@ export default function App() {
                   />
                 ),
               }}
+              
             />
           </Tab.Navigator>
         </NavigationContainer>

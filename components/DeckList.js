@@ -3,7 +3,6 @@ import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import DeckHeader from "./DeckHeader";
 import { connect } from "react-redux";
 
-
 class DeckList extends Component {
   renderSeparator = () => (
     <View
@@ -17,6 +16,19 @@ class DeckList extends Component {
   render() {
     return (
       <View>
+        {!this.props.decks.length && (
+          <View>
+            <View
+              style={{
+                alignItems: "center",
+                padding: 40,
+              }}
+            >
+              <Text style={{ fontSize: 36, textAlign: "center" }}>The list of decks is empty</Text>
+            </View>
+          </View>
+        )}
+
         <FlatList
           data={this.props.decks ? this.props.decks : []}
           keyExtractor={(item) => item.name}

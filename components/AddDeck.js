@@ -21,11 +21,12 @@ class AddDeck extends Component {
 
   createDeck() {
     if (this.isValidInput()) {
+      let deck = { name: this.title, cards: [] };
       let decks = this.props.decks ? this.props.decks : [];
-      decks.push({ name: this.title, cards: [] });
+      decks.push(deck);
       this.props.updateDecks([...decks]);
 
-      this.props.navigation.goBack();
+      this.props.navigation.navigate("Details", { deck: deck })
     } else {
       utils.showAlert("Empty deck title", "Please enter a title for your deck");
     }
@@ -57,6 +58,7 @@ class AddDeck extends Component {
           </Text>
           <TextInput
             placeholder={"Deck title"}
+            value={this.title}
             onChangeText={(text) => (this.title = text)}
             style={{
               backgroundColor: "#FFF",

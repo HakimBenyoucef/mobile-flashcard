@@ -9,16 +9,16 @@ import utils from "../utils/utils";
 class Deck extends Component {
   constructor(props) {
     super(props);
+    this.deck = this.props.route.params.deck;
     this.startQuiz = this.startQuiz.bind(this);
     this.addCard = this.addCard.bind(this);
+
   }
 
-  componentDidMount() {
-    this.deck = this.props.route.params.deck;
-  }
 
   startQuiz() {
     if (this.deck.cards.length) {
+      this.props.navigation.navigate("Quiz", { deck: this.deck })
     } else {
       utils.showAlert(
         "Deck empty",
@@ -58,7 +58,7 @@ class Deck extends Component {
   }
 
   render() {
-    const { deck, navigation } = this.props.route.params;
+    const { deck } = this.props.route.params;
     return (
       <View
         style={{
