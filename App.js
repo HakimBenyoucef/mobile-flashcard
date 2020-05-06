@@ -16,6 +16,9 @@ import Deck from "./components/Deck";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Provider } from "react-redux";
+import { store, persistor } from "./store/configureStore";
+import { PersistGate } from "redux-persist/es/integration/react";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,40 +40,48 @@ function HomeStackScreen() {
 const FlashCardsStatusBar = () => {
   return (
     <View
-      style={{ backgroundColor: "blue", height: Constants.statusBarHeight }}
+      style={{ backgroundColor: "#0088CE", height: Constants.statusBarHeight }}
     >
-      <StatusBar translucent backgroundColor={"blue"} />
+      <StatusBar translucent backgroundColor={"#0088CE"} />
     </View>
   );
 };
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <FlashCardsStatusBar />
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Decks"
-          component={HomeStackScreen}
-          options={{
-            tabBarLabel: "Decks",
-            tabBarIcon: ({ color }) => (
-              <Ionicons name="ios-folder" color={color} size={26} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Add Deck"
-          component={AddDeck}
-          options={{
-            tabBarLabel: "New Deck",
-            tabBarIcon: ({ color }) => (
-              <Ionicons name="ios-add-circle-outline" color={color} size={26} />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <FlashCardsStatusBar />
+          <Tab.Navigator>
+            <Tab.Screen
+              name="Decks"
+              component={HomeStackScreen}
+              options={{
+                tabBarLabel: "Decks",
+                tabBarIcon: ({ color }) => (
+                  <Ionicons name="ios-folder" color={color} size={26} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Add Deck"
+              component={AddDeck}
+              options={{
+                tabBarLabel: "New Deck",
+                tabBarIcon: ({ color }) => (
+                  <Ionicons
+                    name="ios-add-circle-outline"
+                    color={color}
+                    size={26}
+                  />
+                ),
+              }}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 }
 

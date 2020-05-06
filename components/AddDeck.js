@@ -1,11 +1,48 @@
 import React, { Component } from "react";
-import { View, TextInput, Text } from "react-native";
+import {
+  View,
+  TextInput,
+  Text,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+} from "react-native";
 import ButtonDeck from "./ButtonDeck";
+import { connect } from "react-redux";
+import { updateDecks } from "../store/actions/decks";
+import utils from "../utils/utils";
 
-export default class AddDeck extends Component {
+class AddDeck extends Component {
+  constructor(props) {
+    super(props);
+
+    this.createDeck = this.createDeck.bind(this);
+  }
+
+  createDeck() {
+    if (this.isValidInput()) {
+      let decks = this.props.decks ? this.props.decks : [];
+      decks.push({ name: this.title, cards: [] });
+      this.props.updateDecks([...decks]);
+
+      this.props.navigation.goBack();
+    } else {
+      utils.showAlert("Empty deck title", "Please enter a title for your deck");
+    }
+  }
+
+  isValidInput() {
+    return this.title && this.title.length;
+  }
+
+  clearDecks() {
+    this.props.updateDecks([]);
+  }
+
   render() {
     return (
-      <View
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={{
           flex: 1,
           alignItems: "center",
@@ -20,6 +57,7 @@ export default class AddDeck extends Component {
           </Text>
           <TextInput
             placeholder={"Deck title"}
+            onChangeText={(text) => (this.title = text)}
             style={{
               backgroundColor: "#FFF",
               marginTop: 40,
@@ -33,19 +71,32 @@ export default class AddDeck extends Component {
         </View>
         <View
           style={{
-            width: '60%',
+            width: "60%",
             alignItems: "center",
             justifyContent: "space-between",
-            margin: 50
+            margin: 50,
           }}
         >
           <ButtonDeck
             bgColor={"black"}
             textColor={"white"}
             text={"Create Deck"}
+            action={this.createDeck}
           />
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  decks: state.decks.decks,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateDecks: (data) => dispatch(updateDecks(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddDeck);

@@ -2,25 +2,59 @@ import React, { Component } from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import DeckHeader from "./DeckHeader";
 import ButtonDeck from "./ButtonDeck";
+import { connect } from "react-redux";
+import { updateDecks } from "../store/actions/decks";
+import utils from "../utils/utils";
 
-export default class Deck extends Component {
+class Deck extends Component {
   constructor(props) {
     super(props);
     this.startQuiz = this.startQuiz.bind(this);
+    this.addCard = this.addCard.bind(this);
+  }
+
+  componentDidMount() {
+    this.deck = this.props.route.params.deck;
   }
 
   startQuiz() {
-    const { deck, navigation } = this.props.route.params;
-    if (deck.cards.length) {
+    if (this.deck.cards.length) {
     } else {
-        this.showAlert('Deck empty',
+      utils.showAlert(
+        "Deck empty",
         "Sorry, you cannot take a quiz because there are no cards in the deck"
       );
     }
   }
-  
-  showAlert(title, message) {
-    Alert.alert(title, message, [{text: 'OK'}], {cancelable: false});
+
+  addCard() {
+    this.props.navigation.navigate("New Card", { deck: this.deck });
+  }
+
+  deleteDeck() {
+    Alert.alert(
+      "Delete this deck",
+      "Are you sure to delete this deck?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            let decks = this.props.decks.filter(
+              (deck) => deck.name !== this.deck.name
+            );
+            this.props.updateDecks([...decks]);
+
+            this.props.navigation.goBack();
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   }
 
   render() {
@@ -43,18 +77,16 @@ export default class Deck extends Component {
             bgColor={"white"}
             textColor={"black"}
             text={"Add Card"}
-            target={"New Card"}
-            navigation={this.props.navigation}
+            action={this.addCard}
           />
           <ButtonDeck
             bgColor={"black"}
             textColor={"white"}
             text={"Start Quiz"}
             action={this.startQuiz}
-            navigation={this.props.navigation}
           />
-          <TouchableOpacity>
-            <Text style={{ fontSize: 20, color: "red", margin: 10 }}>
+          <TouchableOpacity onPress={() => this.deleteDeck()}>
+            <Text style={{ fontSize: 20, color: "#CD0037", margin: 10 }}>
               Delete Deck
             </Text>
           </TouchableOpacity>
@@ -63,3 +95,15 @@ export default class Deck extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  decks: state.decks.decks,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateDecks: (data) => dispatch(updateDecks(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Deck);

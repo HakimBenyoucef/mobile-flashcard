@@ -1,26 +1,10 @@
 import React, { Component } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import DeckHeader from "./DeckHeader";
+import { connect } from "react-redux";
 
-const DATA = [
-  {
-    name: "Deck1",
-    cards: [1, 2, 3],
-  },
-  {
-    name: "Deck2",
-    cards: [4, 5, 6],
-  },
-  {
-    name: "Deck3",
-    cards: [7, 8],
-  },
-  {
-    name: "Deck4",
-    cards: [],
-  },
-];
-export default class DeckList extends Component {
+
+class DeckList extends Component {
   renderSeparator = () => (
     <View
       style={{
@@ -34,7 +18,7 @@ export default class DeckList extends Component {
     return (
       <View>
         <FlatList
-          data={DATA}
+          data={this.props.decks ? this.props.decks : []}
           keyExtractor={(item) => item.name}
           ItemSeparatorComponent={this.renderSeparator}
           renderItem={({ item }) => (
@@ -51,3 +35,9 @@ export default class DeckList extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  decks: state.decks.decks,
+});
+
+export default connect(mapStateToProps, null)(DeckList);

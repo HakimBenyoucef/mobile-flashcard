@@ -5,11 +5,7 @@ export default class ButtonDeck extends Component {
   render() {
     return (
       <TouchableOpacity
-        onPress={() =>
-          this.props.action
-            ? this.props.action()
-            : this.props.navigation.navigate(this.props.target)
-        }
+        onPress={() => this.props.action()}
         style={{
           width: "100%",
         }}
