@@ -35,6 +35,7 @@ class AddDeck extends Component {
 
   clearText() {
     this.textInput.clear();
+    this.title = ""
   }
 
   isValidInput() {
