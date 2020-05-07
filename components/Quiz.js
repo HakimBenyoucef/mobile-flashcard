@@ -63,7 +63,7 @@ export default class Quiz extends Component {
     }).length;
 
     this.setState({
-      score: (correctAnswers * 100) / this.state.cards.length,
+      score: Math.round((correctAnswers * 100) / this.state.cards.length),
     });
   }
 
