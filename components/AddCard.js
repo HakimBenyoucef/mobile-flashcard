@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, TextInput, KeyboardAvoidingView } from "react-native";
+import { View, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import ButtonDeck from "./ButtonDeck";
 import { connect } from "react-redux";
 import { updateDecks } from "../store/actions/decks";

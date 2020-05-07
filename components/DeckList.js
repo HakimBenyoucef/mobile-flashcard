@@ -16,7 +16,7 @@ class DeckList extends Component {
   render() {
     return (
       <View>
-        {!this.props.decks.length && (
+        {!this.props.decks || !this.props.decks.length && (
           <View>
             <View
               style={{
