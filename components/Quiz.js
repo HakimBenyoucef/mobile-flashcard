@@ -58,7 +58,6 @@ export default class Quiz extends Component {
 
   getScore() {
     let correctAnswers = this.state.cards.filter((card) => {
-      console.log(JSON.stringify(card));
       return card.isCorrect;
     }).length;
 
