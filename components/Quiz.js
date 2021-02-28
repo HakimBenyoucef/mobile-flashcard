@@ -161,7 +161,7 @@ export default class Quiz extends Component {
               <ButtonDeck
                 bgColor={"#CD0037"}
                 textColor={"white"}
-                text="Back to Deck"
+                text="Revenir aux Quizzes"
                 action={this.goBack}
               />
             </View>

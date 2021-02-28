@@ -60,7 +60,7 @@ class AddDeck extends Component {
           <Text
             style={{ fontSize: 40, fontWeight: "bold", textAlign: "center" }}
           >
-            What is the title of your new deck?
+            Nom du Quiz
           </Text>
           <TextInput
             placeholder={"Titre"}

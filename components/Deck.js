@@ -22,27 +22,27 @@ class Deck extends Component {
     } else {
       utils.showAlert(
         "Quiz vide",
-        "Désolé, vous ne pouvez pas faire le quiz car il n'y aucune carte",
+        "Désolé, vous ne pouvez pas faire le Quiz car il n'y aucune carte",
       );
     }
   }
 
   addCard() {
-    this.props.navigation.navigate("New Card", { deck: this.deck });
+    this.props.navigation.navigate("Nouvelle carte", { deck: this.deck });
   }
 
   deleteDeck() {
     Alert.alert(
-      "Delete this deck",
-      "Are you sure to delete this deck?",
+      "Supprimer le Quiz",
+      "Êtes-vous sûr de vouloir supprimer le Quiz?",
       [
         {
-          text: "Cancel",
+          text: "Annuler",
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
         {
-          text: "OK",
+          text: "Supprimer",
           onPress: () => {
             let decks = this.props.decks.filter(
               (deck) => deck.name !== this.deck.name
