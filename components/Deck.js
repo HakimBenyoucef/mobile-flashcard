@@ -21,8 +21,8 @@ class Deck extends Component {
       this.props.navigation.navigate("Quiz", { deck: this.deck })
     } else {
       utils.showAlert(
-        "Deck empty",
-        "Sorry, you cannot take a quiz because there are no cards in the deck"
+        "Quiz vide",
+        "Désolé, vous ne pouvez pas faire le quiz car il n'y aucune carte",
       );
     }
   }
@@ -76,18 +76,18 @@ class Deck extends Component {
           <ButtonDeck
             bgColor={"white"}
             textColor={"black"}
-            text={"Add Card"}
+            text={"Ajouter une carte"}
             action={this.addCard}
           />
           <ButtonDeck
             bgColor={"black"}
             textColor={"white"}
-            text={"Start Quiz"}
+            text={"Commencer le Quiz"}
             action={this.startQuiz}
           />
           <TouchableOpacity onPress={() => this.deleteDeck()}>
             <Text style={{ fontSize: 20, color: "#CD0037", margin: 10 }}>
-              Delete Deck
+              Supprimer le Quiz
             </Text>
           </TouchableOpacity>
         </View>

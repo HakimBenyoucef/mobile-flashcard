@@ -12,7 +12,7 @@ export default class Quiz extends Component {
     this.state = {
       currentCard: 0,
       showAnswer: false,
-      textButton: "Show the answer",
+      textButton: "Afficher la reponse",
       checkQuestion: false,
       showScore: false,
       score: 0,
@@ -127,7 +127,7 @@ export default class Quiz extends Component {
           {this.state.showAnswer && (
             <View>
               <QuesitonView
-                title={"Answer"}
+                title={"Réponse"}
                 content={this.state.cards[this.state.currentCard].answer}
                 color={"green"}
               />
@@ -140,7 +140,7 @@ export default class Quiz extends Component {
                   value={this.state.checkQuestion}
                 />
                 <Text style={{ marginLeft: 20, fontSize: 20 }}>
-                  Correct answer ?
+                  Réponse correct ?
                 </Text>
               </View>
             </View>
@@ -192,7 +192,7 @@ export default class Quiz extends Component {
               <ButtonDeck
                 bgColor={"#0088CE"}
                 textColor={"white"}
-                text="Next question"
+                text="Question suivante"
                 action={this.nextQuestion}
               />
             </View>
@@ -207,7 +207,7 @@ export default class Quiz extends Component {
               <ButtonDeck
                 bgColor={"#CD0037"}
                 textColor={"white"}
-                text="Restart Quiz"
+                text="Refaire le Quiz"
                 action={this.restart}
               />
             </View>

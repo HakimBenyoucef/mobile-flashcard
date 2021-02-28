@@ -16,7 +16,7 @@ class DeckList extends Component {
   render() {
     return (
       <View>
-        {!this.props.decks || !this.props.decks.length && (
+        {(!this.props.decks || !this.props.decks.length) && (
           <View>
             <View
               style={{
@@ -24,7 +24,9 @@ class DeckList extends Component {
                 padding: 40,
               }}
             >
-              <Text style={{ fontSize: 36, textAlign: "center" }}>The list of decks is empty</Text>
+              <Text style={{ fontSize: 36, textAlign: "center" }}>
+                La liste des quizs est vide
+              </Text>
             </View>
           </View>
         )}

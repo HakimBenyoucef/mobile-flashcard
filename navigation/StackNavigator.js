@@ -28,7 +28,7 @@ export default class StackNavigator extends Component {
     return (
       <HomeStack.Navigator>
         <HomeStack.Screen
-          name="List of decks"
+          name="Liste des Quizzes"
           component={DeckList}
           options={{
             transitionSpec: {
@@ -48,7 +48,7 @@ export default class StackNavigator extends Component {
           }}
         />
         <HomeStack.Screen
-          name="New Card"
+          name="Nouvelle carte"
           component={AddCard}
           options={{
             transitionSpec: {

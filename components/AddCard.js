@@ -28,7 +28,7 @@ class AddCard extends Component {
 
       this.props.navigation.navigate("Details", { deck: deck })
     } else {
-      utils.showAlert("Empty fields", "Please enter a question and an answer");
+      utils.showAlert("Champ vide", "Veuillez écrire une question et une réponse");
     }
   }
 
@@ -64,7 +64,7 @@ class AddCard extends Component {
             onChangeText={(text) => (this.question = text)}
           />
           <TextInput
-            placeholder={"Answer"}
+            placeholder={"Réponse"}
             style={{
               backgroundColor: "#FFF",
               margin: 10,
@@ -82,7 +82,7 @@ class AddCard extends Component {
           <ButtonDeck
             bgColor={"black"}
             textColor={"white"}
-            text={"Submit"}
+            text={"Valider"}
             action={this.createCard}
           />
         </KeyboardAvoidingView>

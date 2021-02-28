@@ -29,7 +29,7 @@ export default class TabNavigator extends Component {
             name="Decks"
             component={StackNavigator}
             options={{
-              tabBarLabel: "Decks",
+              tabBarLabel: "Quizzes",
               tabBarIcon: ({ color }) => (
                 <Ionicons name="ios-folder" color={color} size={26} />
               ),
@@ -39,7 +39,7 @@ export default class TabNavigator extends Component {
             name="Add Deck"
             component={AddDeck}
             options={{
-              tabBarLabel: "New Deck",
+              tabBarLabel: "Ajouter un Quiz",
               tabBarIcon: ({ color }) => (
                 <Ionicons
                   name="ios-add-circle-outline"

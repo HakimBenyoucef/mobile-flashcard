@@ -29,7 +29,7 @@ class AddDeck extends Component {
       this.props.navigation.navigate("Details", { deck: deck });
       this.clearText();
     } else {
-      utils.showAlert("Empty deck title", "Please enter a title for your deck");
+      utils.showAlert("Titre vide", "Veuillez entrer un titre pour ce Quiz");
     }
   }
 
@@ -63,7 +63,7 @@ class AddDeck extends Component {
             What is the title of your new deck?
           </Text>
           <TextInput
-            placeholder={"Deck title"}
+            placeholder={"Titre"}
             ref={(ref) => (this.textInput = ref)}
             onChangeText={(text) => (this.title = text)}
             style={{
@@ -88,7 +88,7 @@ class AddDeck extends Component {
           <ButtonDeck
             bgColor={"black"}
             textColor={"white"}
-            text={"Create Deck"}
+            text={"Créer un Quiz"}
             action={this.createDeck}
           />
         </View>
