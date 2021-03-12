@@ -1,17 +1,23 @@
 {
-  "name": "mobile-flashcards",
-  "displayName": "mobile-flashcards",
+  "name": "Self Quiz",
+  "displayName": "Self Quiz",
   "expo": {
-    "name": "mobile-flashcards",
-    "slug": "mobile-flashcards",
+    "name": "Self Quiz",
+    "slug": "SelfQuiz",
+    "icon": "./assests/logo/quiz-icon.png",
+    "description": "Application pour réviser et créer ses propres quizzes",
     "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "sdkVersion": "40.0.0",
+    "platforms": ["ios", "android", "web"],
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "bundleIdentifier": "com.hakim.selfquiz",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.hakim.selfquiz",
+      "versionCode": 2,
+      "permissions": []
+    }
   }
 }

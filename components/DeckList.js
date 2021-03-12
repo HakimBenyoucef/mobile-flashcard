@@ -25,7 +25,7 @@ class DeckList extends Component {
               }}
             >
               <Text style={{ fontSize: 36, textAlign: "center" }}>
-                La liste des quizs est vide
+                La liste des Quizs est vide
               </Text>
             </View>
           </View>
