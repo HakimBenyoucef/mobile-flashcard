@@ -11,6 +11,7 @@ import ButtonDeck from "./ButtonDeck";
 import { connect } from "react-redux";
 import { updateDecks } from "../store/actions/decks";
 import utils from "../utils/utils";
+import QuizApi from "../api/quiz";
 
 class AddDeck extends Component {
   constructor(props) {
@@ -24,6 +25,8 @@ class AddDeck extends Component {
       let deck = { name: this.title, cards: [] };
       let decks = this.props.decks ? this.props.decks : [];
       decks.push(deck);
+      console.log("QuizApi -> add quiz...")
+      QuizApi.addQuiz(this.title);
       this.props.updateDecks([...decks]);
 
       this.props.navigation.navigate("Details", { deck: deck });
@@ -35,7 +38,7 @@ class AddDeck extends Component {
 
   clearText() {
     this.textInput.clear();
-    this.title = ""
+    this.title = "";
   }
 
   isValidInput() {

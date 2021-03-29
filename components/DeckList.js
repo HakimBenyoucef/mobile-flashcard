@@ -2,8 +2,19 @@ import React, { Component } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import DeckHeader from "./DeckHeader";
 import { connect } from "react-redux";
+import QuizApi from "../api/quiz";
+import { updateDecks } from "../store/actions/decks";
 
 class DeckList extends Component {
+  state = { quizzes: [] };
+  componentDidMount() {
+    QuizApi.getAllQuizzes().then((quizzes) => {
+      this.setState({ quizzes });
+      console.log(quizzes)
+      this.props.updateDecks([...quizzes]);
+    });
+  }
+
   renderSeparator = () => (
     <View
       style={{
@@ -16,7 +27,7 @@ class DeckList extends Component {
   render() {
     return (
       <View>
-        {(!this.props.decks || !this.props.decks.length) && (
+        {!this.props.decks || !this.props.decks.length ? (
           <View>
             <View
               style={{
@@ -29,22 +40,22 @@ class DeckList extends Component {
               </Text>
             </View>
           </View>
+        ) : (
+          <FlatList
+            data={this.props.decks ? this.props.decks.length : []}
+            keyExtractor={(item) => item.name}
+            ItemSeparatorComponent={this.renderSeparator}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate("Details", { deck: item })
+                }
+              >
+                <DeckHeader deck={item} />
+              </TouchableOpacity>
+            )}
+          />
         )}
-
-        <FlatList
-          data={this.props.decks ? this.props.decks : []}
-          keyExtractor={(item) => item.name}
-          ItemSeparatorComponent={this.renderSeparator}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate("Details", { deck: item })
-              }
-            >
-              <DeckHeader deck={item} />
-            </TouchableOpacity>
-          )}
-        />
       </View>
     );
   }
@@ -54,4 +65,10 @@ const mapStateToProps = (state) => ({
   decks: state.decks.decks,
 });
 
-export default connect(mapStateToProps, null)(DeckList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateDecks: (data) => dispatch(updateDecks(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList);
