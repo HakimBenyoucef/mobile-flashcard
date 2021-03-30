@@ -4,10 +4,12 @@ import DeckHeader from "./DeckHeader";
 import { connect } from "react-redux";
 import QuizApi from "../api/quiz";
 import { updateDecks } from "../store/actions/decks";
+import { updateAdmin } from "../store/actions/admin";
 
 class DeckList extends Component {
   state = { quizzes: [] };
   componentDidMount() {
+    this.props.updateAdmin(false);
     QuizApi.getAllQuizzes().then((quizzes) => {
       this.setState({ quizzes });
       this.props.updateDecks([...quizzes]);
@@ -67,6 +69,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     updateDecks: (data) => dispatch(updateDecks(data)),
+    updateAdmin: (data) => dispatch(updateAdmin(data)),
   };
 };
 

@@ -76,23 +76,28 @@ class Deck extends Component {
           <DeckHeader deck={deck} />
         </View>
         <View style={{ alignItems: "center", justifyContent: "space-between" }}>
-          <ButtonDeck
-            bgColor={"white"}
-            textColor={"black"}
-            text={"Ajouter une carte"}
-            action={this.addCard}
-          />
+          {this.props.isAdmin && (
+            <ButtonDeck
+              bgColor={"white"}
+              textColor={"black"}
+              text={"Ajouter une carte"}
+              action={this.addCard}
+            />
+          )}
+
           <ButtonDeck
             bgColor={"black"}
             textColor={"white"}
             text={"Commencer le Quiz"}
             action={this.startQuiz}
           />
-          <TouchableOpacity onPress={() => this.deleteDeck()}>
-            <Text style={{ fontSize: 20, color: "#CD0037", margin: 10 }}>
-              Supprimer le Quiz
-            </Text>
-          </TouchableOpacity>
+          {this.props.isAdmin && (
+            <TouchableOpacity onPress={() => this.deleteDeck()}>
+              <Text style={{ fontSize: 20, color: "#CD0037", margin: 10 }}>
+                Supprimer le Quiz
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
@@ -101,6 +106,7 @@ class Deck extends Component {
 
 const mapStateToProps = (state) => ({
   decks: state.decks.decks,
+  isAdmin: state.admin.isAdmin,
 });
 
 const mapDispatchToProps = (dispatch) => {

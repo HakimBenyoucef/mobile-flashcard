@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { createLogger } from "redux-logger";
 import decks from "./reducers/decks";
+import admin from "./reducers/admin";
 import { persistStore, persistReducer } from "redux-persist";
 import { AsyncStorage } from "react-native";
 
@@ -11,6 +12,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   decks: decks,
+  admin: admin,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

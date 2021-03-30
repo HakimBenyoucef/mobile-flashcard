@@ -3,25 +3,25 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AddDeck from "../components/AddDeck";
 import { Ionicons } from "@expo/vector-icons";
 import StackNavigator from "./StackNavigator";
+import { connect } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
-
-
-export default class TabNavigator extends Component {
+class TabNavigator extends Component {
   render() {
     return (
-        <Tab.Navigator>
-          <Tab.Screen
-            name="Decks"
-            component={StackNavigator}
-            options={{
-              tabBarLabel: "Quizzes",
-              tabBarIcon: ({ color }) => (
-                <Ionicons name="ios-folder" color={color} size={26} />
-              ),
-            }}
-          />
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Decks"
+          component={StackNavigator}
+          options={{
+            tabBarLabel: "Quizzes",
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="ios-folder" color={color} size={26} />
+            ),
+          }}
+        />
+        {this.props.isAdmin && (
           <Tab.Screen
             name="Add Deck"
             component={AddDeck}
@@ -36,7 +36,13 @@ export default class TabNavigator extends Component {
               ),
             }}
           />
-        </Tab.Navigator>
+        )}
+      </Tab.Navigator>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  isAdmin: state.admin.isAdmin,
+});
+
+export default connect(mapStateToProps, null)(TabNavigator);

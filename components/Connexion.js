@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { KeyboardAvoidingView } from "react-native";
 import ButtonDeck from "./ButtonDeck";
 import UserApi from "../api/user";
+import { updateAdmin } from "../store/actions/admin";
 
 class Connexion extends Component {
   constructor(props) {
@@ -28,15 +29,16 @@ class Connexion extends Component {
           if (Platform.OS === "android") {
             ToastAndroid.show(msg, ToastAndroid.SHORT);
           } else {
-           //TODO: handle ios Toast 
-           // AlertIOS.alert(msg);
+            //TODO: handle ios Toast
+            // AlertIOS.alert(msg);
           }
-          this.props.navigation.navigate('Liste des Quizzes')
+          this.props.updateAdmin(true);
+          this.props.navigation.navigate("Liste des Quizzes");
           console.log("login response: ", res);
         })
         .catch((error) => {
           console.log("Error: ", error);
-          Alert.alert("Erreur", error   .message);
+          Alert.alert("Erreur", error.message);
         });
     } catch (error) {
       console.log("=====> Error:", error);
@@ -96,8 +98,10 @@ class Connexion extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  decks: state.decks.decks,
-});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateAdmin: (data) => dispatch(updateAdmin(data)),
+  };
+};
 
-export default connect(mapStateToProps, null)(Connexion);
+export default connect(null, mapDispatchToProps)(Connexion);
