@@ -10,7 +10,6 @@ class DeckList extends Component {
   componentDidMount() {
     QuizApi.getAllQuizzes().then((quizzes) => {
       this.setState({ quizzes });
-      console.log(quizzes)
       this.props.updateDecks([...quizzes]);
     });
   }
@@ -25,6 +24,7 @@ class DeckList extends Component {
   );
 
   render() {
+    console.log("this.props.decks.length: ", this.props.decks.length);
     return (
       <View>
         {!this.props.decks || !this.props.decks.length ? (
@@ -42,7 +42,7 @@ class DeckList extends Component {
           </View>
         ) : (
           <FlatList
-            data={this.props.decks ? this.props.decks.length : []}
+            data={this.props.decks ? this.props.decks : []}
             keyExtractor={(item) => item.name}
             ItemSeparatorComponent={this.renderSeparator}
             renderItem={({ item }) => (

@@ -26,7 +26,7 @@ class AddDeck extends Component {
       let decks = this.props.decks ? this.props.decks : [];
       decks.push(deck);
       console.log("QuizApi -> add quiz...")
-      QuizApi.addQuiz(this.title);
+      QuizApi.addQuiz(deck);
       this.props.updateDecks([...decks]);
 
       this.props.navigation.navigate("Details", { deck: deck });

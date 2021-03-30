@@ -21,14 +21,12 @@ function deleteQuiz(id) {
   });
 }
 
-function addQuiz(name) {
+function addQuiz(quiz) {
   console.log("call add quiz... ");
   return request({
     url: "quiz/",
     method: "POST",
-    data: {
-      name,
-    },
+    data: quiz,
   });
 }
 
