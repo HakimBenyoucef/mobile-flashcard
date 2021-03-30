@@ -4,6 +4,9 @@ import Quiz from "../components/Quiz";
 import DeckList from "../components/DeckList";
 import Deck from "../components/Deck";
 import AddCard from "../components/AddCard";
+import { Button } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const HomeStack = createStackNavigator();
 HomeStack.navigationOptions = {
@@ -35,6 +38,14 @@ export default class StackNavigator extends Component {
               open: config,
               close: config,
             },
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => this.props.navigation.openDrawer()}
+                style={{ width: "150%", marginLeft: 10 }}
+              >
+                <Ionicons name="menu-outline"  size={35} />
+              </TouchableOpacity>
+            ),
           }}
         />
         <HomeStack.Screen

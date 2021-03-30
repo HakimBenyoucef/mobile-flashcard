@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, TextInput, Alert } from "react-native";
+import {
+  View,
+  TextInput,
+  Alert,
+  ToastAndroid,
+  AlertIOS,
+  Platform,
+} from "react-native";
 import { connect } from "react-redux";
 import { KeyboardAvoidingView } from "react-native";
 import ButtonDeck from "./ButtonDeck";
@@ -17,11 +24,19 @@ class Connexion extends Component {
       console.log("this.email", this.password);
       UserApi.login(this.email, this.password)
         .then((res) => {
+          const msg = "Connexion réussie";
+          if (Platform.OS === "android") {
+            ToastAndroid.show(msg, ToastAndroid.SHORT);
+          } else {
+           //TODO: handle ios Toast 
+           // AlertIOS.alert(msg);
+          }
+          this.props.navigation.navigate('Liste des Quizzes')
           console.log("login response: ", res);
         })
         .catch((error) => {
           console.log("Error: ", error);
-          Alert.alert("Erreur", error);
+          Alert.alert("Erreur", error   .message);
         });
     } catch (error) {
       console.log("=====> Error:", error);
@@ -41,7 +56,7 @@ class Connexion extends Component {
         <View style={{ marginTop: 100, alignItems: "center", width: "100%" }}>
           <TextInput
             placeholder={"Email"}
-            autoCapitalize='none'
+            autoCapitalize="none"
             autoCorrect={false}
             onChangeText={(text) => (this.email = text)}
             style={{

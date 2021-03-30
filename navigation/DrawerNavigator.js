@@ -26,7 +26,7 @@ const DrawerNavigator = () => {
       <FlashCardsStatusBar />
       <Drawer.Navigator>
         <Drawer.Screen name="Home" component={TabNavigator} />
-        <Drawer.Screen name="Connexion" component={Connexion} />
+        <Drawer.Screen name="Admin" component={Connexion} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Alert } from 'react-native';
 
 /**
  * Request Wrapper with default success/error actions
@@ -24,16 +25,17 @@ const request = async function(options) {
     if (error.response) {
       // Request was made but server responded with something
       // other than 2xx
-      console.log('Status:', error.response.status);
-      console.log('Data:', error.response.data);
-      console.log('Headers:', error.response.headers);
+      console.log('Status:', error?.response?.status);
+      console.log('Data:', error?.response?.data);
+      console.log('Headers:', error?.response?.headers);
     } else {
       // Something else happened while setting up the request
       // triggered the error
       console.log('Error Message:', error.message);
+      Alert.alert("erreur", error.message)
     }
 
-    return Promise.reject(error.response.data);
+    return Promise.reject(error?.response?.data);
   };
 
   return client(options)
