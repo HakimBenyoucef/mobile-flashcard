@@ -1,11 +1,33 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, TextInput } from "react-native";
-import DeckHeader from "./DeckHeader";
+import { View, TextInput, Alert } from "react-native";
 import { connect } from "react-redux";
 import { KeyboardAvoidingView } from "react-native";
 import ButtonDeck from "./ButtonDeck";
+import UserApi from "../api/user";
 
 class Connexion extends Component {
+  constructor(props) {
+    super(props);
+
+    this.login = this.login.bind(this);
+  }
+  login() {
+    try {
+      console.log("this.email", this.email);
+      console.log("this.email", this.password);
+      UserApi.login(this.email, this.password)
+        .then((res) => {
+          console.log("login response: ", res);
+        })
+        .catch((error) => {
+          console.log("Error: ", error);
+          Alert.alert("Erreur", error);
+        });
+    } catch (error) {
+      console.log("=====> Error:", error);
+    }
+  }
+
   render() {
     return (
       <KeyboardAvoidingView
@@ -19,8 +41,9 @@ class Connexion extends Component {
         <View style={{ marginTop: 100, alignItems: "center", width: "100%" }}>
           <TextInput
             placeholder={"Email"}
-            ref={(ref) => (this.email = ref)}
-            onChangeText={(text) => (this.title = text)}
+            autoCapitalize='none'
+            autoCorrect={false}
+            onChangeText={(text) => (this.email = text)}
             style={{
               backgroundColor: "#FFF",
               marginTop: 40,
@@ -33,8 +56,8 @@ class Connexion extends Component {
           />
           <TextInput
             placeholder={"Mot de passe"}
-            ref={(ref) => (this.textInput = ref)}
-            onChangeText={(text) => (this.title = text)}
+            secureTextEntry={true}
+            onChangeText={(text) => (this.password = text)}
             style={{
               backgroundColor: "#FFF",
               marginTop: 40,
@@ -50,7 +73,7 @@ class Connexion extends Component {
             bgColor={"black"}
             textColor={"white"}
             text={"Connexion"}
-            action={this.connect}
+            action={this.login}
           />
         </View>
       </KeyboardAvoidingView>

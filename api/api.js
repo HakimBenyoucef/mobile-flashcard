@@ -18,7 +18,8 @@ const request = async function(options) {
   };
 
   const onError = function(error) {
-    console.log('Request Failed:', error.config);
+    console.log('Request Failed:', error
+    );
 
     if (error.response) {
       // Request was made but server responded with something
@@ -32,7 +33,7 @@ const request = async function(options) {
       console.log('Error Message:', error.message);
     }
 
-    return Promise.reject(error.response || error.message);
+    return Promise.reject(error.response.data);
   };
 
   return client(options)
