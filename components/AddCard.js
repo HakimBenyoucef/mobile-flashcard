@@ -4,6 +4,7 @@ import ButtonDeck from "./ButtonDeck";
 import { connect } from "react-redux";
 import { updateDecks } from "../store/actions/decks";
 import utils from "../utils/utils";
+import CardApi from "../api/card";
 
 class AddCard extends Component {
   constructor(props) {
@@ -11,10 +12,23 @@ class AddCard extends Component {
 
     this.createCard = this.createCard.bind(this);
   }
-
+//TODO: add quiz id in props 
   createCard() {
     if (this.isValidInputs()) {
       let card = { question: this.question, answer: this.answer };
+
+      CardApi.addCard(card)
+        .then((res) => {
+          deck.id = res._id;
+          let decks = this.props.decks ? this.props.decks : [];
+          decks.push(deck);
+          this.props.updateDecks([...decks]);
+
+          this.props.navigation.navigate("Details", { deck: deck });
+          this.clearText();
+        })
+        .catch((err) => Alert.alert("Erreur", err.message));
+
       const { deck } = this.props.route.params;
       let decks = this.props.decks;
       deck.cards.push(card);

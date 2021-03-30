@@ -33,7 +33,7 @@ class AddDeck extends Component {
           this.props.navigation.navigate("Details", { deck: deck });
           this.clearText();
         })
-        .catch((err) => Alert.alert("Erreur", err));
+        .catch((err) => Alert.alert("Erreur", err.message));
     } else {
       utils.showAlert("Titre vide", "Veuillez entrer un titre pour ce Quiz");
     }
