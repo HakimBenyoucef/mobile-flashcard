@@ -1,4 +1,4 @@
-import request from "./apiCentral";
+import request from "./api";
 
 function getAllQuizzes() {
   return request({
@@ -22,7 +22,6 @@ function deleteQuiz(id) {
 }
 
 function addQuiz(quiz) {
-  console.log("call add quiz... ");
   return request({
     url: "quiz/",
     method: "POST",

@@ -24,7 +24,6 @@ class DeckList extends Component {
   );
 
   render() {
-    console.log("this.props.decks.length: ", this.props.decks.length);
     return (
       <View>
         {!this.props.decks || !this.props.decks.length ? (

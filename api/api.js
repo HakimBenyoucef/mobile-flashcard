@@ -14,7 +14,6 @@ const request = async function(options) {
 
   const onSuccess = function(response) {
 
-  console.log("call onSuccess... ");
     return response.data;
   };
 

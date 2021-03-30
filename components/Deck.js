@@ -5,6 +5,7 @@ import ButtonDeck from "./ButtonDeck";
 import { connect } from "react-redux";
 import { updateDecks } from "../store/actions/decks";
 import utils from "../utils/utils";
+import QuizApi from "../api/quiz";
 
 class Deck extends Component {
   constructor(props) {
@@ -12,17 +13,15 @@ class Deck extends Component {
     this.deck = this.props.route.params.deck;
     this.startQuiz = this.startQuiz.bind(this);
     this.addCard = this.addCard.bind(this);
-
   }
-
 
   startQuiz() {
     if (this.deck.cards.length) {
-      this.props.navigation.navigate("Quiz", { deck: this.deck })
+      this.props.navigation.navigate("Quiz", { deck: this.deck });
     } else {
       utils.showAlert(
         "Quiz vide",
-        "Désolé, vous ne pouvez pas faire le Quiz car il n'y aucune carte",
+        "Désolé, vous ne pouvez pas faire le Quiz car il n'y aucune carte"
       );
     }
   }
@@ -44,12 +43,16 @@ class Deck extends Component {
         {
           text: "Supprimer",
           onPress: () => {
-            let decks = this.props.decks.filter(
-              (deck) => deck.name !== this.deck.name
-            );
-            this.props.updateDecks([...decks]);
+            QuizApi.deleteQuiz(this.deck.id)
+              .then((res) => {
+                let decks = this.props.decks.filter(
+                  (deck) => deck.id !== this.deck.id
+                );
+                this.props.updateDecks([...decks]);
 
-            this.props.navigation.goBack();
+                this.props.navigation.goBack();
+              })
+              .catch((error) => Alert.alert("Erreur", error));
           },
         },
       ],

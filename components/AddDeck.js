@@ -23,14 +23,17 @@ class AddDeck extends Component {
   createDeck() {
     if (this.isValidInput()) {
       let deck = { name: this.title, cards: [] };
-      let decks = this.props.decks ? this.props.decks : [];
-      decks.push(deck);
-      console.log("QuizApi -> add quiz...")
-      QuizApi.addQuiz(deck);
-      this.props.updateDecks([...decks]);
+      QuizApi.addQuiz(deck)
+        .then((res) => {
+          deck.id = res._id;
+          let decks = this.props.decks ? this.props.decks : [];
+          decks.push(deck);
+          this.props.updateDecks([...decks]);
 
-      this.props.navigation.navigate("Details", { deck: deck });
-      this.clearText();
+          this.props.navigation.navigate("Details", { deck: deck });
+          this.clearText();
+        })
+        .catch((err) => Alert.alert("Erreur", err));
     } else {
       utils.showAlert("Titre vide", "Veuillez entrer un titre pour ce Quiz");
     }
