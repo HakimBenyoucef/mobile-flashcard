@@ -38,7 +38,10 @@ class Connexion extends Component {
         })
         .catch((error) => {
           console.log("Error: ", error);
-          Alert.alert("Erreur", error.message);
+          Alert.alert(
+            "Identifiants incorrects",
+            "Veuillez vérifier vos identifiants"
+          );
         });
     } catch (error) {
       console.log("=====> Error:", error);

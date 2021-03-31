@@ -29,11 +29,21 @@ function addQuiz(quiz) {
   });
 }
 
+function updateQuiz(id, cards) {
+  console.log("cards: ", cards);
+  return request({
+    url: "quiz/" + id,
+    method: "PATCH",
+    data: { cards: cards },
+  });
+}
+
 const QuizApi = {
   getAllQuizzes,
   getQuiz,
   addQuiz,
   deleteQuiz,
+  updateQuiz,
 };
 
 export default QuizApi;

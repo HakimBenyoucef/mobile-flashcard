@@ -6,6 +6,7 @@ import { updateDecks } from "../store/actions/decks";
 import utils from "../utils/utils";
 import CardApi from "../api/card";
 import { Alert } from "react-native";
+import QuizApi from "../api/quiz";
 
 class AddCard extends Component {
   constructor(props) {
@@ -23,12 +24,12 @@ class AddCard extends Component {
         quizId: deck._id,
       };
 
-      CardApi.addCard(card)
+      deck.cards.push(card);
+      QuizApi.updateQuiz(deck._id, deck.cards)
         .then((res) => {
           let decks = this.props.decks;
-          deck.cards.push(card);
           decks.map((d) => {
-            if (d.id === deck.id) {
+            if (d._id === deck._id) {
               d.cards = deck.cards;
             }
             return d;
