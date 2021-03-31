@@ -5,8 +5,8 @@
     "name": "Self Quiz",
     "slug": "SelfQuiz",
     "icon": "./assests/logo/quiz-icon.png",
-    "description": "Application pour réviser et créer ses propres quizzes",
-    "version": "1.0.0",
+    "description": "Application pour tester sa culture islamique",
+    "version": "2.0.1",
     "sdkVersion": "40.0.0",
     "platforms": ["ios", "android", "web"],
     "assetBundlePatterns": ["**/*"],
@@ -16,7 +16,7 @@
     },
     "android": {
       "package": "com.hakim.selfquiz",
-      "versionCode": 2,
+      "versionCode": 4,
       "permissions": []
     }
   }

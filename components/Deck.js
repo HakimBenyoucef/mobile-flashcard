@@ -43,10 +43,10 @@ class Deck extends Component {
         {
           text: "Supprimer",
           onPress: () => {
-            QuizApi.deleteQuiz(this.deck.id)
+            QuizApi.deleteQuiz(this.deck._id)
               .then((res) => {
                 let decks = this.props.decks.filter(
-                  (deck) => deck.id !== this.deck.id
+                  (deck) => deck._id !== this.deck._id
                 );
                 this.props.updateDecks([...decks]);
 

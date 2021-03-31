@@ -12,14 +12,17 @@ import { KeyboardAvoidingView } from "react-native";
 import ButtonDeck from "./ButtonDeck";
 import UserApi from "../api/user";
 import { updateAdmin } from "../store/actions/admin";
+import { ActivityIndicator } from "react-native";
 
 class Connexion extends Component {
+  state = { loading: false };
   constructor(props) {
     super(props);
 
     this.login = this.login.bind(this);
   }
   login() {
+    this.setState({ loading: true });
     try {
       console.log("this.email", this.email);
       console.log("this.email", this.password);
@@ -35,6 +38,7 @@ class Connexion extends Component {
           this.props.updateAdmin(true);
           this.props.navigation.navigate("Liste des Quizzes");
           console.log("login response: ", res);
+          this.setState({ loading: false });
         })
         .catch((error) => {
           console.log("Error: ", error);
@@ -95,6 +99,8 @@ class Connexion extends Component {
             text={"Connexion"}
             action={this.login}
           />
+
+          <ActivityIndicator animating={this.state.loading} size="large" />
         </View>
       </KeyboardAvoidingView>
     );
