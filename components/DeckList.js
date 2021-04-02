@@ -54,41 +54,47 @@ class DeckList extends Component {
   render() {
     return (
       <SafeAreaView>
-          {!this.props.decks || !this.props.decks.length ? (
+        {!this.props.decks || !this.props.decks.length ? (
+          <ScrollView
+            contentContainerStyle={{
+              alignItems: "center",
+              padding: 40,
+            }}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this.onRefresh}
+              />
+            }
+          >
             <View>
-              <View
-                style={{
-                  alignItems: "center",
-                  padding: 40,
-                }}
-              >
-                <Text style={{ fontSize: 36, textAlign: "center" }}>
-                  La liste des Quizs est vide
-                </Text>
-              </View>
+              <Text style={{ fontSize: 36, textAlign: "center" }}>
+                La liste des Quizzes est vide
+              </Text>
             </View>
-          ) : (
-            <FlatList
-              refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this.onRefresh}
-                />
-              }
-              data={this.props.decks ? this.props.decks : []}
-              keyExtractor={(item) => item.name}
-              ItemSeparatorComponent={this.renderSeparator}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={() =>
-                    this.props.navigation.navigate("Details", { deck: item })
-                  }
-                >
-                  <DeckHeader deck={item} />
-                </TouchableOpacity>
-              )}
-            />
-          )}
+          </ScrollView>
+        ) : (
+          <FlatList
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this.onRefresh}
+              />
+            }
+            data={this.props.decks ? this.props.decks : []}
+            keyExtractor={(item) => item.name}
+            ItemSeparatorComponent={this.renderSeparator}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate("Details", { deck: item })
+                }
+              >
+                <DeckHeader deck={item} />
+              </TouchableOpacity>
+            )}
+          />
+        )}
       </SafeAreaView>
     );
   }
