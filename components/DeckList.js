@@ -59,6 +59,7 @@ class DeckList extends Component {
             contentContainerStyle={{
               alignItems: "center",
               padding: 40,
+              height: "100%"
             }}
             refreshControl={
               <RefreshControl
@@ -75,6 +76,7 @@ class DeckList extends Component {
           </ScrollView>
         ) : (
           <FlatList
+          style={{height: "100%"}}
             refreshControl={
               <RefreshControl
                 refreshing={this.state.refreshing}

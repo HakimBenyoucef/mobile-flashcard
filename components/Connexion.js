@@ -64,7 +64,7 @@ class Connexion extends Component {
       >
         <View style={{ marginTop: 100, alignItems: "center", width: "100%" }}>
           <TextInput
-            placeholder={"Email"}
+            placeholder={"Utilisateur"}
             autoCapitalize="none"
             autoCorrect={false}
             onChangeText={(text) => (this.email = text)}
